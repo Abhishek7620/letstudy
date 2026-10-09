@@ -1,0 +1,3715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Roadmaps | Java Backend & Product Company</title>
+
+    <style>
+        :root {
+            --bg: #070b14;
+            --panel: #0d1322;
+            --panel2: #111a2c;
+            --panel3: #151f33;
+            --border: #1f2a3d;
+            --text: #f2f5f9;
+            --muted: #98a6ba;
+
+            --purple: #8b5cf6;
+            --purple2: #a78bfa;
+            --cyan: #22d3ee;
+            --green: #34d399;
+            --orange: #fb923c;
+            --yellow: #facc15;
+            --red: #f87171;
+
+            --gradient: linear-gradient(90deg, var(--cyan), var(--purple));
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(139,92,246,.10), transparent 28%),
+                radial-gradient(circle at 90% 5%, rgba(34,211,238,.08), transparent 25%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(18px);
+            background: rgba(7,11,20,.88);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1500px;
+            margin: auto;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .nav button {
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            padding: 9px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: .2s;
+        }
+
+        .nav button:hover,
+        .nav button.active {
+            color: var(--text);
+            border-color: var(--purple);
+            background: rgba(139,92,246,.10);
+        }
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
+
+        .container {
+            max-width: 1500px;
+            margin: auto;
+            padding: 35px 25px 70px;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            padding: 45px 0 35px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.025);
+            border-radius: 999px;
+            color: var(--cyan);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(36px, 5vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 900px;
+            color: var(--muted);
+            font-size: 18px;
+            margin: 18px 0 0;
+        }
+
+        .target-note {
+            margin-top: 20px;
+            padding: 16px 18px;
+            border-left: 3px solid var(--purple);
+            background: rgba(139,92,246,.07);
+            border-radius: 8px;
+            color: #c7d2e4;
+        }
+
+        .target-note strong {
+            color: var(--text);
+        }
+
+        /* =========================================================
+           STATS
+        ========================================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 18px;
+        }
+
+        .stat-value {
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           ROADMAP SWITCHER
+        ========================================================= */
+
+        .roadmap-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .roadmap-option {
+            border: 1px solid var(--border);
+            background: var(--panel);
+            border-radius: 16px;
+            padding: 22px;
+            cursor: pointer;
+            transition: .25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap-option::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: .25s;
+        }
+
+        .roadmap-option:hover {
+            transform: translateY(-2px);
+            border-color: var(--purple);
+        }
+
+        .roadmap-option.active {
+            border-color: var(--purple);
+            box-shadow: 0 0 35px rgba(139,92,246,.12);
+        }
+
+        .roadmap-option.active::before {
+            opacity: .035;
+        }
+
+        .roadmap-option > * {
+            position: relative;
+        }
+
+        .option-title {
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .option-subtitle {
+            color: var(--muted);
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .option-badge {
+            display: inline-block;
+            margin-top: 13px;
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(34,211,238,.08);
+            color: var(--cyan);
+        }
+
+        /* =========================================================
+           CAREER LADDER
+        ========================================================= */
+
+        .career-ladder {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0 0 6px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            margin: 0 0 20px;
+        }
+
+        .ladder {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .ladder-step {
+            position: relative;
+            padding: 18px;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .ladder-number {
+            font-size: 12px;
+            color: var(--cyan);
+            font-weight: 800;
+        }
+
+        .ladder-step h3 {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+
+        .ladder-step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           CONTROLS
+        ========================================================= */
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 30px 0;
+            position: sticky;
+            top: 67px;
+            z-index: 20;
+            padding: 12px 0;
+            background: rgba(7,11,20,.94);
+            backdrop-filter: blur(12px);
+            flex-wrap: wrap;
+        }
+
+        .search {
+            flex: 1;
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--text);
+            outline: none;
+        }
+
+        .search input:focus {
+            border-color: var(--purple);
+        }
+
+        .reset-btn {
+            padding: 12px 16px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+            color: var(--red);
+            border-color: var(--red);
+        }
+
+        /* =========================================================
+           PROGRESS
+        ========================================================= */
+
+        .overall-progress {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 13px;
+            margin-bottom: 25px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 9px;
+            font-size: 14px;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #182235;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient);
+            border-radius: inherit;
+            transition: width .3s;
+        }
+
+        /* =========================================================
+           LAYOUT
+        ========================================================= */
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 245px minmax(0,1fr);
+            gap: 25px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 135px;
+            align-self: start;
+            max-height: calc(100vh - 155px);
+            overflow-y: auto;
+        }
+
+        .sidebar-inner {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .sidebar-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--muted);
+            letter-spacing: 1px;
+            padding: 10px;
+        }
+
+        .phase-link {
+            display: block;
+            padding: 9px 10px;
+            border-radius: 7px;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 2px;
+            transition: .2s;
+        }
+
+        .phase-link:hover {
+            background: var(--panel2);
+            color: var(--text);
+        }
+
+        .phase-link .num {
+            color: var(--purple2);
+            margin-right: 6px;
+            font-weight: 800;
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        /* =========================================================
+           PHASE CARD
+        ========================================================= */
+
+        .phase {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 22px;
+            overflow: hidden;
+            scroll-margin-top: 140px;
+        }
+
+        .phase-header {
+            padding: 23px;
+            border-bottom: 1px solid var(--border);
+            background:
+                linear-gradient(135deg, rgba(139,92,246,.07), transparent 45%),
+                var(--panel);
+        }
+
+        .phase-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .phase-number {
+            min-width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: #05070d;
+            font-weight: 900;
+        }
+
+        .phase-info {
+            flex: 1;
+        }
+
+        .phase-category {
+            color: var(--cyan);
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .phase-title {
+            font-size: 22px;
+            margin: 3px 0;
+        }
+
+        .phase-duration {
+            color: var(--orange);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .phase-description {
+            color: var(--muted);
+            margin: 8px 0 0;
+            font-size: 14px;
+        }
+
+        .phase-progress {
+            min-width: 150px;
+        }
+
+        .phase-progress-text {
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .mini-track {
+            height: 6px;
+            background: #182235;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .mini-fill {
+            height: 100%;
+            width: 0;
+            background: var(--green);
+            transition: .3s;
+        }
+
+        /* =========================================================
+           TOPICS
+        ========================================================= */
+
+        .topics {
+            padding: 22px;
+        }
+
+        .topics-heading {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 13px;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 8px;
+        }
+
+        .topic {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: rgba(255,255,255,.015);
+            color: #c6d0df;
+            font-size: 13px;
+            transition: .15s;
+        }
+
+        .topic:hover {
+            border-color: var(--border);
+            background: rgba(255,255,255,.025);
+        }
+
+        .topic input {
+            margin-top: 3px;
+            accent-color: var(--purple);
+            flex-shrink: 0;
+        }
+
+        .topic.completed {
+            color: #6f7c91;
+            text-decoration: line-through;
+        }
+
+        /* =========================================================
+           EXIT CRITERIA
+        ========================================================= */
+
+        .exit-section {
+            padding: 0 22px 22px;
+        }
+
+        .exit-heading {
+            font-size: 14px;
+            font-weight: 800;
+            margin: 5px 0 12px;
+        }
+
+        .exit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 9px;
+        }
+
+        .exit-card {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .exit-card h4 {
+            margin: 0 0 8px;
+            font-size: 13px;
+        }
+
+        .exit-card ul {
+            padding-left: 17px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .exit-card li {
+            margin-bottom: 5px;
+        }
+
+        /* =========================================================
+           TARGET PROFILE
+        ========================================================= */
+
+        .target-profile {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+        }
+
+        .skill-matrix {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+        }
+
+        .skill {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .skill strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .skill span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           EXECUTION PLAN
+        ========================================================= */
+
+        .execution {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 25px 0;
+        }
+
+        .execution-grid {
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            gap: 8px;
+        }
+
+        .day {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 13px;
+            text-align: center;
+        }
+
+        .day strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .day span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           PROJECT
+        ========================================================= */
+
+        .project {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .architecture {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .arch-box {
+            background: var(--panel2);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .arch-arrow {
+            text-align: center;
+            color: var(--cyan);
+            font-size: 22px;
+        }
+
+        /* =========================================================
+           FINAL CHECKLIST
+        ========================================================= */
+
+        .final-checklist {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 25px 0;
+        }
+
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 8px;
+        }
+
+        .check-item {
+            padding: 11px;
+            border-radius: 8px;
+            background: var(--panel2);
+            color: #c8d2df;
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           NO RESULTS
+        ========================================================= */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--muted);
+        }
+
+        .filter-chips,
+        .control-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .chip,
+        .ghost-btn {
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--muted);
+            padding: 10px 13px;
+            border-radius: 9px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: .2s;
+        }
+
+        .chip:hover,
+        .ghost-btn:hover,
+        .chip.active {
+            color: var(--text);
+            border-color: var(--purple);
+            background: rgba(139,92,246,.12);
+        }
+
+        .today-banner {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            margin: 0 0 22px;
+            padding: 16px 18px;
+            border: 1px solid rgba(34,211,238,.25);
+            background: linear-gradient(135deg, rgba(34,211,238,.08), rgba(139,92,246,.08));
+            border-radius: 14px;
+        }
+
+        .today-banner p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .ladder-step {
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .ladder-step:hover,
+        .ladder-step.active {
+            border-color: var(--purple);
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(139,92,246,.12);
+        }
+
+        .skill {
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .skill:hover {
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+        }
+
+        .phase-header {
+            cursor: pointer;
+        }
+
+        .phase-toggle {
+            margin-left: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .phase.collapsed .phase-body {
+            display: none;
+        }
+
+        .phase.is-complete {
+            border-color: rgba(52,211,153,.45);
+        }
+
+        .phase-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .phase-link .mini {
+            font-size: 10px;
+            color: var(--cyan);
+            font-weight: 800;
+        }
+
+        .phase-link.done {
+            color: var(--green);
+        }
+
+        .topic {
+            cursor: pointer;
+        }
+
+        .topic:focus-within,
+        .topic.focus-topic {
+            border-color: var(--cyan);
+            background: rgba(34,211,238,.08);
+        }
+
+        .day {
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .day:hover {
+            border-color: var(--purple);
+        }
+
+        .day.today {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 1px rgba(34,211,238,.35);
+        }
+
+        .day.done {
+            border-color: var(--green);
+            background: rgba(52,211,153,.08);
+        }
+
+        .check-item {
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            transition: .2s;
+        }
+
+        .check-item:hover {
+            border: 1px solid var(--border);
+        }
+
+        .check-item.done {
+            color: #6f7c91;
+            text-decoration: line-through;
+            border: 1px solid rgba(52,211,153,.3);
+        }
+
+        .check-item input {
+            margin-top: 3px;
+            accent-color: var(--green);
+        }
+
+        .toast {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 2000;
+            max-width: 360px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #122033;
+            border: 1px solid var(--purple);
+            color: var(--text);
+            box-shadow: 0 18px 40px rgba(0,0,0,.35);
+            transform: translateY(120%);
+            opacity: 0;
+            transition: .25s;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .kbd-hint {
+            color: var(--muted);
+            font-size: 11px;
+            margin-left: 8px;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            max-width: 1500px;
+            margin: auto;
+            padding: 30px 25px 50px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 1100px) {
+            .exit-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .skill-matrix {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .ladder {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .execution-grid {
+                grid-template-columns: repeat(4,1fr);
+            }
+
+            .today-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media(max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .main-layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: sticky;
+                top: 118px;
+                max-height: none;
+                overflow-x: auto;
+                z-index: 15;
+                margin-bottom: 20px;
+            }
+
+            .sidebar-inner {
+                display: flex;
+                gap: 5px;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .sidebar-heading {
+                display: none;
+            }
+
+            .phase-link {
+                display: inline-block;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 650px) {
+            .container {
+                padding: 20px 14px 50px;
+            }
+
+            .header-inner {
+                padding: 12px 14px;
+            }
+
+            .hero {
+                padding-top: 30px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .roadmap-switcher {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phase-top {
+                flex-wrap: wrap;
+            }
+
+            .phase-progress {
+                width: 100%;
+            }
+
+            .exit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-matrix {
+                grid-template-columns: 1fr;
+            }
+
+            .ladder {
+                grid-template-columns: 1fr;
+            }
+
+            .execution-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .architecture {
+                grid-template-columns: 1fr;
+            }
+
+            .arch-arrow {
+                transform: rotate(90deg);
+            }
+
+            .checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                top: 62px;
+            }
+
+            .today-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            <span>Career</span> Roadmaps
+        </div>
+
+        <nav class="nav">
+            <button data-section="top" onclick="scrollToSection('top')">Home</button>
+            <button data-section="career" onclick="scrollToSection('career')">Career Path</button>
+            <button data-section="roadmap-area" onclick="scrollToSection('roadmap-area')">Roadmap</button>
+            <button data-section="execution" onclick="scrollToSection('execution')">Execution</button>
+            <button data-section="final" onclick="scrollToSection('final')">Final Readiness</button>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ======================================================
+         HERO
+    ======================================================= -->
+
+    <section class="hero" id="top">
+
+        <div class="eyebrow">
+            ⚡ Two Career Paths • One Dashboard
+        </div>
+
+        <h1>
+            Java Backend
+            <span class="gradient-text">Career Roadmaps</span>
+        </h1>
+
+        <p>
+            Two independent roadmaps designed for two different career stages:
+            becoming a Java Backend Developer from testing, and progressing from
+            an experienced Java Backend Engineer into a strong product-based
+            engineering role.
+        </p>
+
+        <div class="target-note">
+            <strong>Important:</strong>
+            The second roadmap treats existing professional experience as an asset.
+            It does not ask an experienced Java developer to restart from beginner Java.
+            The compensation target can be approximately ₹90L–₹1Cr as a personal goal,
+            but compensation depends on role, level, location, stock, bonus and offer structure.
+            This roadmap focuses on the engineering capability required to compete for
+            strong product-company roles rather than guaranteeing a package.
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         STATS
+    ======================================================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-value" id="statTrack">A</div>
+            <div class="stat-label" id="statTrackLabel">Active track</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="statWeeks">18–22</div>
+            <div class="stat-label" id="statWeeksLabel">Weeks for Tester Track</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="statTopics">0</div>
+            <div class="stat-label">Topics completed on this track</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="statPhases">0</div>
+            <div class="stat-label">Phases remaining</div>
+        </div>
+
+    </div>
+
+    <!-- ======================================================
+         CAREER LADDER
+    ======================================================= -->
+
+    <section class="career-ladder" id="career">
+
+        <h2 class="section-title">Career Ladder</h2>
+
+        <p class="section-description">
+            The two roadmaps start from different points. Select the track that matches
+            the person you are preparing for.
+        </p>
+
+        <div class="ladder">
+
+            <div class="ladder-step" data-track="tester" onclick="switchRoadmap('tester')">
+                <div class="ladder-number">01</div>
+                <h3>Tester</h3>
+                <p>Testing experience, automation and QA fundamentals.</p>
+            </div>
+
+            <div class="ladder-step" data-track="tester" onclick="switchRoadmap('tester')">
+                <div class="ladder-number">02</div>
+                <h3>Java Backend Developer</h3>
+                <p>Java, Spring Boot, SQL, REST, JPA, Kafka and microservices.</p>
+            </div>
+
+            <div class="ladder-step" data-track="experienced" onclick="switchRoadmap('experienced')">
+                <div class="ladder-number">03</div>
+                <h3>Experienced Backend Engineer</h3>
+                <p>Production systems, architecture, debugging and ownership.</p>
+            </div>
+
+            <div class="ladder-step" data-track="experienced" onclick="switchRoadmap('experienced')">
+                <div class="ladder-number">04</div>
+                <h3>Product-Company SDE</h3>
+                <p>DSA, LLD, HLD, distributed systems and product engineering.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         ROADMAP SWITCHER
+    ======================================================= -->
+
+    <div class="roadmap-switcher">
+
+        <div class="roadmap-option active"
+             id="switcher-tester"
+             onclick="switchRoadmap('tester')">
+
+            <div class="option-title">
+                Roadmap A — Tester → Java Backend Developer
+            </div>
+
+            <div class="option-subtitle">
+                For someone transitioning from testing into backend development.
+            </div>
+
+            <div class="option-badge">
+                BEGINNER → PROFESSIONAL BACKEND
+            </div>
+
+        </div>
+
+        <div class="roadmap-option"
+             id="switcher-experienced"
+             onclick="switchRoadmap('experienced')">
+
+            <div class="option-title">
+                Roadmap B — 7.5 YOE Java Developer → Product Company
+            </div>
+
+            <div class="option-subtitle">
+                For an experienced Java/Spring Boot/Microservices engineer targeting
+                strong product-based engineering roles.
+            </div>
+
+            <div class="option-badge">
+                EXPERIENCED ENGINEER → PRODUCT SDE
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================================
+         ROADMAP AREA
+    ======================================================= -->
+
+    <section id="roadmap-area">
+
+        <div class="overall-progress">
+
+            <div class="progress-header">
+                <strong id="overallLabel">
+                    Roadmap Progress
+                </strong>
+
+                <span id="overallPercent">
+                0%
+            </span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="overallFill"></div>
+            </div>
+
+        </div>
+
+        <div class="today-banner" id="todayBanner">
+            <div>
+                <strong id="todayTitle">Today</strong>
+                <p id="todayDetail">Pick a track to see today's session.</p>
+            </div>
+            <button class="ghost-btn" onclick="continueLearning()">Jump to next topic</button>
+        </div>
+
+        <div class="controls">
+
+            <div class="search">
+                <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search Java, Kafka, DSA, System Design, SQL...  (/ to focus)"
+                        autocomplete="off"
+                >
+            </div>
+
+            <div class="filter-chips" id="filterChips">
+                <button class="chip active" data-filter="all" onclick="setTopicFilter('all')">All</button>
+                <button class="chip" data-filter="remaining" onclick="setTopicFilter('remaining')">Remaining</button>
+                <button class="chip" data-filter="done" onclick="setTopicFilter('done')">Done</button>
+            </div>
+
+            <div class="control-actions">
+                <button class="ghost-btn" onclick="toggleAllPhases(false)">Expand all</button>
+                <button class="ghost-btn" onclick="toggleAllPhases(true)">Collapse all</button>
+                <button class="reset-btn" onclick="resetProgress()">
+                    Reset Progress
+                </button>
+            </div>
+
+        </div>
+
+        <div class="main-layout">
+
+            <aside class="sidebar">
+
+                <div class="sidebar-inner" id="sidebar"></div>
+
+            </aside>
+
+            <div class="content">
+
+                <div id="phases"></div>
+
+                <div class="no-results" id="noResults">
+                    No matching phases or topics found.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         TARGET PROFILE
+    ======================================================= -->
+
+    <section class="target-profile" id="profile">
+
+        <h2 class="section-title" id="profileTitle">
+            Experienced Engineer — Target Profile
+        </h2>
+
+        <p class="section-description" id="profileDescription">
+            This is the capability profile for the second roadmap. The objective is
+            not merely to know technologies, but to demonstrate engineering depth,
+            problem-solving ability and system-level thinking.
+        </p>
+
+        <div class="skill-matrix" id="skillMatrix">
+
+            <div class="skill">
+                <strong>Java / JVM</strong>
+                <span>Deep internals, concurrency, JVM, GC, modern Java.</span>
+            </div>
+
+            <div class="skill">
+                <strong>Backend</strong>
+                <span>Spring Boot, REST, JPA, transactions, APIs and resilience.</span>
+            </div>
+
+            <div class="skill">
+                <strong>DSA</strong>
+                <span>Patterns, complexity, medium problems and selected hard problems.</span>
+            </div>
+
+            <div class="skill">
+                <strong>LLD</strong>
+                <span>SOLID, OOD, design patterns, extensible Java designs.</span>
+            </div>
+
+            <div class="skill">
+                <strong>HLD</strong>
+                <span>Scalability, availability, consistency and distributed systems.</span>
+            </div>
+
+            <div class="skill">
+                <strong>Databases</strong>
+                <span>SQL, indexes, transactions, locking and database scaling.</span>
+            </div>
+
+            <div class="skill">
+                <strong>Messaging</strong>
+                <span>Kafka, partitions, delivery semantics, idempotency and events.</span>
+            </div>
+
+            <div class="skill">
+                <strong>Production</strong>
+                <span>Docker, Kubernetes, CI/CD, observability and incident debugging.</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         EXECUTION PLAN
+    ======================================================= -->
+
+    <section class="execution" id="execution">
+
+        <h2 class="section-title" id="executionTitle">
+            Weekly Execution Plan — Experienced Track
+        </h2>
+
+        <p class="section-description" id="executionDescription">
+            A practical schedule for someone working full-time. The objective is
+            consistency rather than trying to complete everything in one sitting.
+            Click a day to mark this week's session done.
+        </p>
+
+        <div class="execution-grid" id="executionGrid">
+
+            <div class="day">
+                <strong>MON</strong>
+                <span>35m DSA<br>25m Java</span>
+            </div>
+
+            <div class="day">
+                <strong>TUE</strong>
+                <span>35m DSA<br>25m Backend</span>
+            </div>
+
+            <div class="day">
+                <strong>WED</strong>
+                <span>30m HLD<br>30m DSA</span>
+            </div>
+
+            <div class="day">
+                <strong>THU</strong>
+                <span>35m DSA<br>25m LLD</span>
+            </div>
+
+            <div class="day">
+                <strong>FRI</strong>
+                <span>30m SQL<br>30m Backend</span>
+            </div>
+
+            <div class="day">
+                <strong>SAT</strong>
+                <span>Project<br>HLD / LLD</span>
+            </div>
+
+            <div class="day">
+                <strong>SUN</strong>
+                <span>Mock<br>Review</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ======================================================
+         PROJECT
+    ======================================================= -->
+
+    <section class="project">
+
+        <h2 class="section-title">
+            Portfolio / System Design Capstone
+        </h2>
+
+        <p class="section-description">
+            Use one serious backend system as the platform for demonstrating API
+            design, database modelling, Kafka, distributed transactions,
+            resilience, observability and deployment.
+        </p>
+
+        <div class="architecture">
+
+            <div class="arch-box">
+                Customer Service<br>
+                <small>REST + PostgreSQL</small>
+            </div>
+
+            <div class="arch-arrow">→</div>
+
+            <div class="arch-box">
+                Account Service<br>
+                <small>JPA + Transactions</small>
+            </div>
+
+            <div class="arch-arrow">→</div>
+
+            <div class="arch-box">
+                Transaction Service<br>
+                <small>Kafka Events</small>
+            </div>
+
+            <div class="arch-arrow">↓</div>
+
+            <div class="arch-box">
+                Audit Service
+            </div>
+
+            <div class="arch-arrow">→</div>
+
+            <div class="arch-box">
+                Notification Service
+            </div>
+
+        </div>
+
+        <p class="section-description">
+            The same project can be used for backend coding, API design, SQL,
+            Kafka, LLD, HLD, debugging and project-deep-dive interviews.
+        </p>
+
+    </section>
+
+    <!-- ======================================================
+         FINAL READINESS
+    ======================================================= -->
+
+    <section class="final-checklist" id="final">
+
+        <h2 class="section-title">
+            Final Readiness Checklist
+        </h2>
+
+        <p class="section-description">
+            Completion should mean demonstrated capability, not simply watching
+            courses or checking topics.
+        </p>
+
+        <div class="checklist" id="finalChecklist"></div>
+
+    </section>
+
+</main>
+
+<footer>
+    Java Career Roadmaps • Tester → Backend Developer • Experienced Java Developer → Product Company
+    <span class="kbd-hint">Shortcuts: / search · 1 tester track · 2 product track</span>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+
+    /* =========================================================
+       ROADMAP DATA
+    ========================================================= */
+
+    const roadmaps = {
+
+    tester: [
+
+    {
+    id:"tester-core-java",
+    number:"01",
+    category:"Foundation",
+    title:"Core Java Revision",
+    duration:"Weeks 1–3",
+    description:"Build strong Java fundamentals required to move from testing into backend development.",
+    topics:[
+    "JDK, JRE, JVM, Stack & Heap",
+    "OOP — Encapsulation, Inheritance, Polymorphism, Abstraction",
+    "Class, Object, Constructor",
+    "Overloading & Overriding",
+    "String, String Pool, StringBuilder & StringBuffer",
+    "equals(), hashCode(), toString()",
+    "Collections — List, Set, Map, Queue",
+    "ArrayList, LinkedList, HashSet, TreeSet",
+    "HashMap, LinkedHashMap, TreeMap",
+    "HashMap Internals, Hashing, Collision & Rehashing",
+    "ConcurrentHashMap & Concurrent Collections",
+    "Generics & Wildcards",
+    "Exception Handling & Custom Exceptions",
+    "Java 8 — Lambda, Functional Interfaces & Streams",
+    "Optional, Method References & Collectors",
+    "Multithreading & Concurrency",
+    "Thread, Runnable, Callable & Future",
+    "ExecutorService & Thread Pools",
+    "synchronized, volatile, Lock & Atomic Classes",
+    "Race Condition, Deadlock & Thread Safety",
+    "JVM, Garbage Collection & Memory Management",
+    "Java Memory Model & Happens-Before",
+    "Java 17/21 — Records, Sealed Classes, Pattern Matching & Virtual Threads"
+    ],
+    exit:{
+    understand:[
+    "Explain JVM execution, Stack vs Heap and OOP from first principles.",
+    "Explain Collections, HashMap internals, JMM, concurrency and GC."
+    ],
+    implement:[
+    "Write clean Java using Collections, Generics, Streams and Optional.",
+    "Implement concurrency using ExecutorService and synchronization primitives."
+    ],
+    debug:[
+    "Diagnose collection bugs, race conditions, deadlocks and memory issues.",
+    "Debug NPEs and incorrect equals/hashCode implementations."
+    ],
+    interview:[
+    "Explain HashMap internals and ConcurrentHashMap.",
+    "Explain JVM memory, volatile, synchronized, ExecutorService and deadlocks."
+    ]
+    }
+    },
+
+    {
+    id:"tester-sql",
+    number:"02",
+    category:"Database",
+    title:"SQL & Database",
+    duration:"Weeks 3–5",
+    description:"Develop practical SQL and database knowledge for backend development.",
+    topics:[
+    "SELECT, WHERE, ORDER BY, GROUP BY, HAVING",
+    "INNER JOIN, LEFT JOIN, RIGHT JOIN",
+    "Subqueries and CTE",
+    "Window Functions",
+    "Primary Key and Foreign Key",
+    "Indexes",
+    "Composite Indexes",
+    "Normalization",
+    "Transactions",
+    "ACID",
+    "Isolation Levels",
+    "Locks",
+    "Deadlocks",
+    "Query Optimization",
+    "Execution Plans"
+    ],
+    exit:{
+    understand:[
+    "Explain SQL logical execution order.",
+    "Explain joins, indexes, ACID, isolation and locking."
+    ],
+    implement:[
+    "Write complex joins, CTEs, subqueries and window functions.",
+    "Design normalized tables and appropriate indexes."
+    ],
+    debug:[
+    "Diagnose slow queries and missing indexes.",
+    "Identify duplicate rows and transaction problems."
+    ],
+    interview:[
+    "Solve medium/hard SQL problems.",
+    "Explain query execution, indexes, composite indexes and isolation."
+    ]
+    }
+    },
+
+    {
+    id:"tester-spring-core",
+    number:"03",
+    category:"Spring",
+    title:"Spring Core",
+    duration:"Weeks 5–7",
+    description:"Understand the Spring container and dependency injection deeply.",
+    topics:[
+    "IoC & Dependency Injection",
+    "ApplicationContext",
+    "Spring Beans",
+    "Bean Lifecycle",
+    "Component Scanning",
+    "@Component, @Service, @Repository",
+    "@Configuration & @Bean",
+    "Constructor Injection",
+    "Singleton & Prototype Scope",
+    "Spring AOP",
+    "Spring Proxies"
+    ],
+    exit:{
+    understand:[
+    "Explain IoC, DI, ApplicationContext and bean lifecycle.",
+    "Explain Spring scopes, AOP and proxies."
+    ],
+    implement:[
+    "Build a Spring application using constructor injection.",
+    "Create configuration classes and custom beans."
+    ],
+    debug:[
+    "Debug missing beans and circular dependencies.",
+    "Debug scope and proxy-related issues."
+    ],
+    interview:[
+    "Explain Spring bean creation.",
+    "Explain dependency injection and AOP proxies."
+    ]
+    }
+    },
+
+    {
+    id:"tester-springboot",
+    number:"04",
+    category:"Spring Boot",
+    title:"Spring Boot",
+    duration:"Weeks 7–9",
+    description:"Move from Spring fundamentals to production-style Spring Boot applications.",
+    topics:[
+    "@SpringBootApplication",
+    "Auto Configuration",
+    "Starter Dependencies",
+    "application.properties",
+    "application.yml",
+    "Profiles & Environment Configuration",
+    "Logging",
+    "Actuator",
+    "Application Startup Flow",
+    "Bean Creation & Dependency Injection"
+    ],
+    exit:{
+    understand:[
+    "Explain Spring Boot auto-configuration.",
+    "Explain application startup and configuration."
+    ],
+    implement:[
+    "Build production-style Boot applications.",
+    "Use profiles, external configuration and Actuator."
+    ],
+    debug:[
+    "Debug startup failures and configuration issues.",
+    "Debug dependency and profile problems."
+    ],
+    interview:[
+    "Explain @SpringBootApplication.",
+    "Explain auto-configuration and application startup."
+    ]
+    }
+    },
+
+    {
+    id:"tester-rest",
+    number:"05",
+    category:"Backend",
+    title:"REST API Development",
+    duration:"Weeks 9–11",
+    description:"Build robust production-style REST APIs.",
+    topics:[
+    "GET, POST, PUT, PATCH, DELETE",
+    "@RestController",
+    "@RequestMapping",
+    "HTTP Method Mappings",
+    "@PathVariable",
+    "@RequestParam",
+    "@RequestBody",
+    "@RequestHeader",
+    "ResponseEntity",
+    "HTTP Status Codes",
+    "Request Validation",
+    "Global Exception Handling",
+    "Pagination",
+    "Sorting",
+    "Filtering",
+    "API Versioning",
+    "Idempotency",
+    "JWT Authentication & Authorization"
+    ],
+    exit:{
+    understand:[
+    "Explain HTTP semantics and REST principles.",
+    "Explain idempotency, authentication and authorization."
+    ],
+    implement:[
+    "Build CRUD APIs with validation.",
+    "Implement pagination, filtering, JWT and exception handling."
+    ],
+    debug:[
+    "Debug 400/401/403/404/409/500 errors.",
+    "Debug validation and authentication problems."
+    ],
+    interview:[
+    "Design REST APIs.",
+    "Explain status codes, pagination, JWT, idempotency and versioning."
+    ]
+    }
+    },
+
+    {
+    id:"tester-jpa",
+    number:"06",
+    category:"Persistence",
+    title:"JPA & Hibernate",
+    duration:"Weeks 10–12",
+    description:"Understand how Java objects become database operations.",
+    topics:[
+    "@Entity",
+    "@Id",
+    "@GeneratedValue",
+    "One-to-One",
+    "One-to-Many",
+    "Many-to-One",
+    "Persistence Context",
+    "First-Level Cache",
+    "Dirty Checking",
+    "Lazy vs Eager",
+    "N+1 Problem",
+    "Cascade Operations",
+    "Entity Lifecycle",
+    "@Transactional",
+    "Optimistic Locking",
+    "Pessimistic Locking"
+    ],
+    exit:{
+    understand:[
+    "Explain persistence context and entity lifecycle.",
+    "Explain dirty checking, lazy loading, caching and transactions."
+    ],
+    implement:[
+    "Implement entity relationships.",
+    "Create transactional services and optimized queries."
+    ],
+    debug:[
+    "Debug N+1 and LazyInitializationException.",
+    "Debug unexpected SQL and locking problems."
+    ],
+    interview:[
+    "Explain persistence context.",
+    "Explain dirty checking, lazy loading, N+1 and locking."
+    ]
+    }
+    },
+
+    {
+    id:"tester-kafka",
+    number:"07",
+    category:"Messaging",
+    title:"Kafka",
+    duration:"Weeks 12–15",
+    description:"Learn event-driven communication and reliable messaging.",
+    topics:[
+    "Kafka Broker",
+    "Producer",
+    "Consumer",
+    "Topics",
+    "Partitions",
+    "Offsets",
+    "Consumer Groups",
+    "Replication",
+    "Ordering",
+    "Rebalancing",
+    "KafkaTemplate",
+    "@KafkaListener",
+    "Producer Configuration",
+    "Consumer Configuration",
+    "Offset Management",
+    "Retries",
+    "Dead Letter Topics",
+    "At-Least-Once Delivery",
+    "Duplicate Messages",
+    "Idempotency",
+    "Error Handling"
+    ],
+    exit:{
+    understand:[
+    "Explain brokers, topics, partitions, offsets and groups.",
+    "Explain replication, ordering, rebalancing and delivery semantics."
+    ],
+    implement:[
+    "Build Spring Kafka producers and consumers.",
+    "Implement retries and DLT."
+    ],
+    debug:[
+    "Debug duplicates and consumer lag.",
+    "Debug rebalance and offset problems."
+    ],
+    interview:[
+    "Design a Kafka flow.",
+    "Explain partitions, consumer groups, offsets, retries and DLT."
+    ]
+    }
+    },
+
+    {
+    id:"tester-microservices",
+    number:"08",
+    category:"Architecture",
+    title:"Microservices",
+    duration:"Weeks 15–17",
+    description:"Understand how multiple backend services communicate and fail.",
+    topics:[
+    "Microservices Architecture",
+    "API Gateway",
+    "Service Discovery",
+    "Configuration Management",
+    "REST Communication",
+    "Kafka Communication",
+    "Timeouts",
+    "Retries",
+    "Circuit Breaker",
+    "Distributed Tracing",
+    "Centralized Logging",
+    "Synchronous vs Asynchronous Communication"
+    ],
+    exit:{
+    understand:[
+    "Explain service boundaries and communication models.",
+    "Explain resilience and distributed failure modes."
+    ],
+    implement:[
+    "Build multiple Spring Boot services.",
+    "Implement REST/Kafka communication and resilience."
+    ],
+    debug:[
+    "Trace failures across services.",
+    "Diagnose timeout cascades and retry storms."
+    ],
+    interview:[
+    "Design microservice architecture.",
+    "Explain service boundaries, communication and resilience."
+    ]
+    }
+    },
+
+    {
+    id:"tester-testing",
+    number:"09",
+    category:"Quality",
+    title:"Testing",
+    duration:"Parallel",
+    description:"Use testing as an engineering skill rather than only a QA activity.",
+    topics:[
+    "JUnit 5",
+    "Unit Testing",
+    "Mockito",
+    "@Mock",
+    "@InjectMocks",
+    "when() / thenReturn()",
+    "verify()",
+    "ArgumentCaptor",
+    "MockMvc",
+    "@SpringBootTest",
+    "Integration Testing",
+    "Testcontainers",
+    "REST API Testing",
+    "Kafka Testing"
+    ],
+    exit:{
+    understand:[
+    "Understand unit, slice and integration testing.",
+    "Understand mocking boundaries."
+    ],
+    implement:[
+    "Write JUnit and Mockito tests.",
+    "Create integration tests with Testcontainers."
+    ],
+    debug:[
+    "Debug failing tests and bad mocks.",
+    "Debug database and Kafka integration tests."
+    ],
+    interview:[
+    "Explain unit vs integration testing.",
+    "Explain Mockito and Testcontainers."
+    ]
+    }
+    },
+
+    {
+    id:"tester-finclient",
+    number:"10",
+    category:"Real System",
+    title:"FinClient",
+    duration:"Weeks 17–19",
+    description:"Understand a real business application end-to-end.",
+    topics:[
+    "FinClient Architecture",
+    "Application Flow",
+    "APIs & Interfaces",
+    "Request & Response Flow",
+    "Authentication & Security",
+    "Configuration",
+    "Error Handling",
+    "Integration Points",
+    "Messaging & Event Flow",
+    "Transaction Processing",
+    "Logging & Troubleshooting",
+    "Runtime & Deployment Flow"
+    ],
+    exit:{
+    understand:[
+    "Draw the architecture and explain request flow.",
+    "Understand authentication, integrations, events and deployment."
+    ],
+    implement:[
+    "Trace a business flow through APIs, services, DB and messaging."
+    ],
+    debug:[
+    "Start from a failure and trace logs and downstream dependencies."
+    ],
+    interview:[
+    "Explain the system in business and technical terms.",
+    "Explain components, data flow and failure handling."
+    ]
+    }
+    },
+
+    {
+    id:"tester-project",
+    number:"11",
+    category:"Capstone",
+    title:"Backend Project",
+    duration:"Weeks 12–20",
+    description:"Build a production-style banking transaction system.",
+    topics:[
+    "Customer Service",
+    "Account Service",
+    "Transaction Service",
+    "Customer REST APIs",
+    "Account REST APIs",
+    "PostgreSQL",
+    "JPA/Hibernate",
+    "Debit/Credit",
+    "Fund Transfer",
+    "Transaction History",
+    "Kafka Transaction Events",
+    "Audit Service",
+    "Notification Service",
+    "Retry & Failure Handling",
+    "Duplicate Transaction Handling",
+    "Docker"
+    ],
+    exit:{
+    understand:[
+    "Explain architecture and service boundaries.",
+    "Explain DB ownership, Kafka events and failure scenarios."
+    ],
+    implement:[
+    "Build services, APIs, DB model and fund transfer.",
+    "Implement Kafka, audit, notification and Docker."
+    ],
+    debug:[
+    "Debug downstream failures and duplicate requests.",
+    "Debug Kafka consumer and DB conflicts."
+    ],
+    interview:[
+    "Defend architecture and API decisions.",
+    "Explain Kafka, idempotency, testing and trade-offs."
+    ]
+    }
+    },
+
+    {
+    id:"tester-interview",
+    number:"12",
+    category:"Interview",
+    title:"Interview Preparation",
+    duration:"Weeks 18–22",
+    description:"Turn the learning into interview performance.",
+    topics:[
+    "Core Java Questions",
+    "Collections & HashMap Internals",
+    "Java 8 Streams",
+    "Multithreading",
+    "JVM & GC",
+    "Spring Boot Internals",
+    "REST API Design",
+    "JPA/Hibernate",
+    "SQL Optimization",
+    "Kafka Architecture",
+    "Microservices",
+    "System Design Basics",
+    "DSA Arrays & Strings",
+    "DSA HashMap",
+    "Stack & Queue",
+    "Linked List",
+    "Trees",
+    "Heap",
+    "Binary Search",
+    "Project Discussion",
+    "Mock Interviews"
+    ],
+    exit:{
+    understand:[
+    "Connect Java, Spring, SQL, Kafka and microservices.",
+    "Understand common interview patterns."
+    ],
+    implement:[
+    "Solve coding and design problems from a blank editor."
+    ],
+    debug:[
+    "Reason from symptom to root cause."
+    ],
+    interview:[
+    "Explain concepts clearly.",
+    "Defend the project and architecture."
+    ]
+    }
+    }
+
+    ],
+
+    /* =========================================================
+       EXPERIENCED JAVA DEVELOPER ROADMAP
+    ========================================================= */
+
+    experienced:[
+
+    {
+    id:"exp-assessment",
+    number:"01",
+    category:"Baseline",
+    title:"7.5 YOE Engineering Assessment",
+    duration:"Week 1",
+    description:"Map existing professional experience and identify interview gaps before starting preparation.",
+    topics:[
+    "Inventory current Java expertise",
+    "Inventory Spring Boot expertise",
+    "Inventory Microservices expertise",
+    "Inventory SQL expertise",
+    "Inventory Kafka expertise",
+    "Inventory AWS / Cloud exposure",
+    "Inventory Docker / Kubernetes exposure",
+    "Identify DSA gap",
+    "Identify LLD gap",
+    "Identify HLD gap",
+    "Identify CS fundamentals gap",
+    "Review current resume",
+    "Prepare project architecture notes",
+    "List production incidents handled",
+    "List major technical decisions",
+    "List measurable engineering impact"
+    ],
+    exit:{
+    understand:[
+    "Know which areas are already strong from professional experience.",
+    "Identify gaps between current production work and product-company interviews."
+    ],
+    implement:[
+    "Create a personal interview-gap matrix.",
+    "Create architecture diagrams for major projects."
+    ],
+    debug:[
+    "Identify weak areas based on actual interview-style questions.",
+    "Separate knowledge gaps from communication gaps."
+    ],
+    interview:[
+    "Give a concise 5-minute professional introduction.",
+    "Explain current project architecture without documentation."
+    ]
+    }
+    },
+
+    {
+    id:"exp-java",
+    number:"02",
+    category:"Advanced Java",
+    title:"Advanced Java & JVM",
+    duration:"Weeks 1–4",
+    description:"Do not relearn Java syntax. Upgrade existing Java knowledge into interview-level internal depth.",
+    topics:[
+    "Java Memory Model",
+    "Happens-Before",
+    "Stack vs Heap",
+    "Object Memory",
+    "Garbage Collection",
+    "Generational GC",
+    "G1 GC",
+    "ZGC Concepts",
+    "Class Loading",
+    "JIT Compilation",
+    "Bytecode Basics",
+    "Escape Analysis",
+    "String Pool",
+    "HashMap Internals",
+    "ConcurrentHashMap Internals",
+    "Java Collections Internals",
+    "equals/hashCode Contract",
+    "Generics Type Erasure",
+    "Lambda Internals",
+    "Streams Internals",
+    "Optional",
+    "ExecutorService",
+    "Thread Pools",
+    "CompletableFuture",
+    "ForkJoinPool",
+    "volatile",
+    "synchronized",
+    "Lock",
+    "ReadWriteLock",
+    "Atomic Classes",
+    "CAS",
+    "Deadlock",
+    "Race Conditions",
+    "Thread Safety",
+    "Virtual Threads",
+    "Java 17/21 Features"
+    ],
+    exit:{
+    understand:[
+    "Explain JVM execution and memory management at implementation level.",
+    "Explain concurrency, JMM, CAS, thread pools and virtual threads."
+    ],
+    implement:[
+    "Build concurrent Java components from a blank editor.",
+    "Use CompletableFuture and ExecutorService correctly."
+    ],
+    debug:[
+    "Diagnose race conditions, deadlocks, memory pressure and thread-pool issues.",
+    "Reason about GC and JVM performance symptoms."
+    ],
+    interview:[
+    "Handle deep Java/JVM follow-up questions.",
+    "Explain why an implementation behaves a certain way internally."
+    ]
+    }
+    },
+
+    {
+    id:"exp-dsa",
+    number:"03",
+    category:"DSA",
+    title:"Data Structures & Algorithms",
+    duration:"Weeks 1–12",
+    description:"The biggest transition from experienced backend engineer to product-company interview readiness.",
+    topics:[
+    "Big-O Complexity",
+    "Arrays",
+    "Strings",
+    "HashMap",
+    "HashSet",
+    "Two Pointers",
+    "Sliding Window",
+    "Prefix Sum",
+    "Sorting",
+    "Searching",
+    "Binary Search Patterns",
+    "Linked List",
+    "Stack",
+    "Queue",
+    "Monotonic Stack",
+    "Monotonic Queue",
+    "Recursion",
+    "Backtracking",
+    "Trees",
+    "Binary Search Tree",
+    "Tree Traversals",
+    "Heap",
+    "Priority Queue",
+    "Intervals",
+    "Greedy",
+    "Graphs",
+    "BFS",
+    "DFS",
+    "Topological Sort",
+    "Union Find / DSU",
+    "Shortest Path Basics",
+    "Dynamic Programming",
+    "1D DP",
+    "2D DP",
+    "Knapsack",
+    "Bit Manipulation",
+    "Trie",
+    "Problem Pattern Recognition",
+    "Problem Decomposition",
+    "Timed Practice",
+    "Code From Blank Editor",
+    "Explain Before Coding"
+    ],
+    exit:{
+    understand:[
+    "Recognize recurring DSA patterns.",
+    "Explain correctness and complexity rather than memorizing solutions."
+    ],
+    implement:[
+    "Solve medium-level problems consistently.",
+    "Solve selected hard problems and write clean Java from scratch."
+    ],
+    debug:[
+    "Catch edge cases and off-by-one errors.",
+    "Identify complexity and state-transition problems."
+    ],
+    interview:[
+    "Clarify requirements.",
+    "Explain brute force, optimize, code, test and discuss alternatives."
+    ]
+    }
+    },
+
+    {
+    id:"exp-spring",
+    number:"04",
+    category:"Backend",
+    title:"Spring Boot & Backend Deep Dive",
+    duration:"Weeks 4–8",
+    description:"Convert existing Spring experience into deep framework and production knowledge.",
+    topics:[
+    "Spring IoC Internals",
+    "BeanFactory vs ApplicationContext",
+    "Bean Lifecycle",
+    "Dependency Injection",
+    "Bean Scopes",
+    "Spring Proxies",
+    "JDK Dynamic Proxy",
+    "CGLIB",
+    "Spring AOP",
+    "@Transactional Internals",
+    "Transaction Proxy",
+    "Propagation",
+    "Isolation",
+    "Spring MVC Request Flow",
+    "DispatcherServlet",
+    "HandlerMapping",
+    "HandlerAdapter",
+    "Filters",
+    "Interceptors",
+    "Exception Handling",
+    "Validation",
+    "Configuration Binding",
+    "Profiles",
+    "Auto Configuration",
+    "Spring Boot Startup",
+    "Actuator",
+    "Production Configuration"
+    ],
+    exit:{
+    understand:[
+    "Trace a Spring request from HTTP entry to controller, service and repository.",
+    "Explain proxy-based features such as transactions and AOP."
+    ],
+    implement:[
+    "Build production-style APIs with clean layering.",
+    "Configure transactions, validation, error handling and observability."
+    ],
+    debug:[
+    "Debug proxy, transaction and bean lifecycle problems.",
+    "Diagnose startup and configuration failures."
+    ],
+    interview:[
+    "Explain Spring internals instead of annotations only.",
+    "Trace @Transactional and HTTP request execution."
+    ]
+    }
+    },
+
+    {
+    id:"exp-sql",
+    number:"05",
+    category:"Database",
+    title:"Advanced SQL & Database Internals",
+    duration:"Weeks 5–9",
+    description:"Move from writing SQL to understanding why database queries perform the way they do.",
+    topics:[
+    "SQL Logical Execution Order",
+    "Physical Query Execution",
+    "Execution Plans",
+    "Index Scan",
+    "Sequential Scan",
+    "B-Tree Index",
+    "Composite Index",
+    "Covering Index Concepts",
+    "Cardinality",
+    "Selectivity",
+    "Query Optimization",
+    "Join Algorithms",
+    "Nested Loop Join",
+    "Hash Join",
+    "Merge Join",
+    "Transactions",
+    "ACID",
+    "Isolation Levels",
+    "MVCC",
+    "Locks",
+    "Deadlocks",
+    "Optimistic Locking",
+    "Pessimistic Locking",
+    "Normalization",
+    "Denormalization",
+    "Partitioning",
+    "Replication",
+    "Read Replicas",
+    "Connection Pooling",
+    "Database Bottlenecks"
+    ],
+    exit:{
+    understand:[
+    "Explain how a SQL query moves from parser to execution plan.",
+    "Explain indexes, joins, MVCC, locking and isolation."
+    ],
+    implement:[
+    "Design schemas for real backend systems.",
+    "Create indexes based on query patterns."
+    ],
+    debug:[
+    "Diagnose slow queries using execution plans.",
+    "Diagnose deadlocks, connection-pool exhaustion and locking."
+    ],
+    interview:[
+    "Solve advanced SQL problems.",
+    "Explain database trade-offs in system design."
+    ]
+    }
+    },
+
+    {
+    id:"exp-kafka",
+    number:"06",
+    category:"Distributed Backend",
+    title:"Kafka & Event-Driven Architecture",
+    duration:"Weeks 7–11",
+    description:"Go beyond producer/consumer usage into reliability and distributed event processing.",
+    topics:[
+    "Kafka Architecture",
+    "Broker",
+    "Topic",
+    "Partition",
+    "Leader",
+    "Follower",
+    "Replication",
+    "ISR",
+    "Producer Acknowledgements",
+    "Producer Idempotence",
+    "Consumer Groups",
+    "Offsets",
+    "Offset Commit",
+    "Consumer Rebalancing",
+    "Partition Ordering",
+    "Consumer Lag",
+    "At-Least-Once Delivery",
+    "At-Most-Once Concepts",
+    "Exactly-Once Concepts",
+    "Duplicate Events",
+    "Idempotent Consumers",
+    "Retry Topics",
+    "Dead Letter Topics",
+    "Poison Messages",
+    "Schema Evolution",
+    "Event Versioning",
+    "Outbox Pattern",
+    "Transactional Messaging",
+    "Kafka Failure Scenarios"
+    ],
+    exit:{
+    understand:[
+    "Explain how Kafka achieves partitioned distributed processing.",
+    "Explain delivery guarantees and their practical limitations."
+    ],
+    implement:[
+    "Build reliable event-driven workflows.",
+    "Implement retries, DLT and idempotent consumers."
+    ],
+    debug:[
+    "Diagnose consumer lag, rebalance and duplicate-event problems.",
+    "Trace event failures across producer and consumer."
+    ],
+    interview:[
+    "Design Kafka-based systems.",
+    "Explain offset and delivery semantics under failure."
+    ]
+    }
+    },
+
+    {
+    id:"exp-microservices",
+    number:"07",
+    category:"Architecture",
+    title:"Production Microservices",
+    duration:"Weeks 9–14",
+    description:"Turn microservice experience into architecture-level reasoning.",
+    topics:[
+    "Service Boundaries",
+    "Domain-Driven Service Design",
+    "API Gateway",
+    "Service Discovery",
+    "Configuration Management",
+    "Synchronous Communication",
+    "Asynchronous Communication",
+    "Timeouts",
+    "Retries",
+    "Circuit Breaker",
+    "Bulkhead",
+    "Rate Limiting",
+    "Idempotency",
+    "Distributed Transactions",
+    "Saga Pattern",
+    "Outbox Pattern",
+    "Event-Driven Architecture",
+    "Distributed Tracing",
+    "Centralized Logging",
+    "Correlation IDs",
+    "Failure Isolation",
+    "Retry Storms",
+    "Cascading Failures"
+    ],
+    exit:{
+    understand:[
+    "Reason about service boundaries and distributed failure modes.",
+    "Explain synchronous vs asynchronous trade-offs."
+    ],
+    implement:[
+    "Design resilient microservice flows.",
+    "Implement timeout, retry, circuit breaker and idempotency."
+    ],
+    debug:[
+    "Trace failures across service boundaries.",
+    "Diagnose cascading failures and retry storms."
+    ],
+    interview:[
+    "Design production microservices.",
+    "Explain why a service boundary or communication model was selected."
+    ]
+    }
+    },
+
+    {
+    id:"exp-lld",
+    number:"08",
+    category:"Design",
+    title:"Low-Level Design / Object-Oriented Design",
+    duration:"Weeks 10–17",
+    description:"Build the ability to translate requirements into extensible, testable Java designs.",
+    topics:[
+    "SOLID",
+    "DRY",
+    "KISS",
+    "Composition vs Inheritance",
+    "Interfaces",
+    "Abstraction",
+    "Encapsulation",
+    "Strategy Pattern",
+    "Factory Pattern",
+    "Abstract Factory",
+    "Builder Pattern",
+    "Observer Pattern",
+    "Decorator Pattern",
+    "Adapter Pattern",
+    "Command Pattern",
+    "Template Method",
+    "State Pattern",
+    "UML/Class Diagrams",
+    "Thread Safety in Design",
+    "Extensibility",
+    "Testability",
+    "Parking Lot",
+    "Elevator",
+    "Vending Machine",
+    "Splitwise",
+    "Notification Engine",
+    "Rate Limiter",
+    "Cache"
+    ],
+    exit:{
+    understand:[
+    "Understand design principles and pattern trade-offs.",
+    "Identify coupling and extensibility problems."
+    ],
+    implement:[
+    "Design clean Java classes and interfaces.",
+    "Build extensible and testable object models."
+    ],
+    debug:[
+    "Identify tight coupling and violated invariants.",
+    "Identify concurrency problems in object designs."
+    ],
+    interview:[
+    "Drive LLD from requirements to classes/interfaces.",
+    "Explain design decisions and alternatives."
+    ]
+    }
+    },
+
+    {
+    id:"exp-hld",
+    number:"09",
+    category:"System Design",
+    title:"High-Level System Design",
+    duration:"Weeks 14–24",
+    description:"Develop the ability to design scalable distributed systems in an interview setting.",
+    topics:[
+    "Requirements Clarification",
+    "Functional Requirements",
+    "Non-Functional Requirements",
+    "Capacity Estimation",
+    "Latency",
+    "Throughput",
+    "Availability",
+    "Reliability",
+    "Scalability",
+    "Load Balancing",
+    "Caching",
+    "CDN",
+    "Database Scaling",
+    "SQL vs NoSQL",
+    "Sharding",
+    "Replication",
+    "Read Replicas",
+    "Partitioning",
+    "Message Queues",
+    "Kafka",
+    "Event-Driven Architecture",
+    "Consistency Models",
+    "CAP Theorem",
+    "Rate Limiting",
+    "Idempotency",
+    "Distributed Locks",
+    "Service Discovery",
+    "API Gateway",
+    "Object Storage",
+    "Search Systems",
+    "Observability",
+    "SLI",
+    "SLO",
+    "SLA",
+    "Disaster Recovery",
+    "Backups",
+    "Multi-Region Concepts",
+    "Security Basics",
+    "URL Shortener Design",
+    "Notification System",
+    "Chat System",
+    "File Storage",
+    "Payment System",
+    "Order System",
+    "Rate Limiter",
+    "News Feed"
+    ],
+    exit:{
+    understand:[
+    "Translate requirements into architecture and identify bottlenecks.",
+    "Reason about consistency, scalability and failure trade-offs."
+    ],
+    implement:[
+    "Create architecture diagrams and APIs.",
+    "Define data models, scaling and failure-handling strategies."
+    ],
+    debug:[
+    "Find bottlenecks and single points of failure.",
+    "Reason about latency, throughput and cascading failures."
+    ],
+    interview:[
+    "Lead a 45–60 minute design discussion.",
+    "Clarify requirements, estimate scale and defend trade-offs."
+    ]
+    }
+    },
+
+    {
+    id:"exp-cs",
+    number:"10",
+    category:"Computer Science",
+    title:"Computer Science Fundamentals",
+    duration:"Weeks 18–26",
+    description:"Fill the CS depth that experienced backend engineers are often expected to demonstrate in product-company interviews.",
+    topics:[
+    "Operating Systems",
+    "Process vs Thread",
+    "Context Switching",
+    "Virtual Memory",
+    "Paging",
+    "CPU Scheduling",
+    "Synchronization",
+    "Networking Fundamentals",
+    "TCP/IP",
+    "TCP Connection Lifecycle",
+    "HTTP",
+    "HTTPS",
+    "DNS",
+    "TLS Basics",
+    "REST",
+    "WebSockets",
+    "DB Internals",
+    "B-Tree / B+Tree",
+    "Indexes",
+    "Transactions",
+    "Isolation",
+    "Locking",
+    "Distributed Systems Fundamentals",
+    "Consistency",
+    "Consensus Concepts"
+    ],
+    exit:{
+    understand:[
+    "Explain what happens from client request to backend and database.",
+    "Connect OS, networking and database concepts to backend systems."
+    ],
+    implement:[
+    "Apply CS concepts to design decisions.",
+    "Use the correct abstraction when solving backend problems."
+    ],
+    debug:[
+    "Diagnose latency, connection, memory and thread issues.",
+    "Reason about database and network bottlenecks."
+    ],
+    interview:[
+    "Answer CS fundamentals without memorized definitions.",
+    "Connect fundamentals to real production systems."
+    ]
+    }
+    },
+
+    {
+    id:"exp-cloud",
+    number:"11",
+    category:"Production",
+    title:"Cloud / DevOps / Production Engineering",
+    duration:"Weeks 22–30",
+    description:"Become comfortable discussing how a backend service actually reaches production.",
+    topics:[
+    "Linux Fundamentals",
+    "Processes",
+    "Threads",
+    "Files",
+    "Permissions",
+    "Networking Commands",
+    "Docker",
+    "Docker Images",
+    "Docker Containers",
+    "Docker Networking",
+    "Docker Volumes",
+    "Kubernetes Fundamentals",
+    "Pods",
+    "Deployments",
+    "Services",
+    "Ingress",
+    "ConfigMaps",
+    "Secrets",
+    "Readiness Probes",
+    "Liveness Probes",
+    "CI/CD",
+    "Jenkins",
+    "GitHub Actions Concepts",
+    "AWS IAM",
+    "AWS EC2",
+    "AWS S3",
+    "AWS RDS",
+    "AWS VPC Basics",
+    "Cloud Monitoring",
+    "Logs",
+    "Metrics",
+    "Traces",
+    "Rolling Deployment",
+    "Blue-Green Deployment",
+    "Canary Deployment",
+    "Production Incidents"
+    ],
+    exit:{
+    understand:[
+    "Explain how services are packaged, deployed and monitored.",
+    "Understand basic production infrastructure."
+    ],
+    implement:[
+    "Dockerize the capstone.",
+    "Deploy locally to Kubernetes and create a CI pipeline."
+    ],
+    debug:[
+    "Debug container failures and networking problems.",
+    "Debug Kubernetes configuration and readiness/liveness failures."
+    ],
+    interview:[
+    "Explain deployment architecture.",
+    "Walk through production troubleshooting."
+    ]
+    }
+    },
+
+    {
+    id:"exp-testing",
+    number:"12",
+    category:"Quality",
+    title:"Testing & Engineering Excellence",
+    duration:"Weeks 24–29",
+    description:"Use testing as part of engineering design rather than a separate activity.",
+    topics:[
+    "JUnit 5",
+    "Mockito",
+    "Unit Testing",
+    "Integration Testing",
+    "Contract Testing Concepts",
+    "MockMvc",
+    "Spring Boot Test",
+    "Testcontainers",
+    "Database Integration Tests",
+    "Kafka Integration Tests",
+    "Test Isolation",
+    "Test Data",
+    "Test Pyramid",
+    "Code Coverage",
+    "Static Analysis",
+    "Code Review",
+    "Refactoring",
+    "Technical Debt",
+    "API Contract Validation"
+    ],
+    exit:{
+    understand:[
+    "Choose the correct testing level for a problem.",
+    "Understand testability as a design property."
+    ],
+    implement:[
+    "Build meaningful unit and integration test suites.",
+    "Use Testcontainers for realistic dependencies."
+    ],
+    debug:[
+    "Find whether a failure is in production code, test setup or dependency integration.",
+    "Reduce flaky tests."
+    ],
+    interview:[
+    "Explain testing strategy for a microservice.",
+    "Defend mocking versus real integration dependencies."
+    ]
+    }
+    },
+
+    {
+    id:"exp-product",
+    number:"13",
+    category:"Product Engineering",
+    title:"Product Engineering & Behavioral",
+    duration:"Weeks 26–32",
+    description:"Transition from implementation-focused answers to ownership, impact and product thinking.",
+    topics:[
+    "Ownership",
+    "Customer Impact",
+    "Product Thinking",
+    "Ambiguous Requirements",
+    "Trade-off Communication",
+    "Prioritization",
+    "Metrics",
+    "Experimentation Concepts",
+    "A/B Testing Concepts",
+    "Code Review",
+    "Technical Documentation",
+    "Incident Management",
+    "Postmortems",
+    "STAR Stories",
+    "Conflict & Collaboration",
+    "Failure & Learning",
+    "Leadership Without Authority",
+    "Project Deep Dive",
+    "Resume Bullet Defense",
+    "Measurable Outcomes"
+    ],
+    exit:{
+    understand:[
+    "Explain why a feature matters, not only how it is implemented.",
+    "Understand product and engineering trade-offs."
+    ],
+    implement:[
+    "Convert vague requirements into technical scope.",
+    "Define measurable technical or product outcomes."
+    ],
+    debug:[
+    "Analyze production and business problems.",
+    "Communicate impact and root cause clearly."
+    ],
+    interview:[
+    "Give concise STAR-based behavioral answers.",
+    "Defend every resume and project claim."
+    ]
+    }
+    },
+
+    {
+    id:"exp-project",
+    number:"14",
+    category:"Capstone",
+    title:"Production-Grade Backend Capstone",
+    duration:"Weeks 20–32",
+    description:"Build one serious system that can support backend, design and project-deep-dive interviews.",
+    topics:[
+    "Customer Service",
+    "Account Service",
+    "Transaction Service",
+    "PostgreSQL",
+    "JPA/Hibernate",
+    "REST APIs",
+    "Authentication",
+    "Authorization",
+    "Fund Transfer",
+    "Transaction History",
+    "Kafka Events",
+    "Audit Service",
+    "Notification Service",
+    "Idempotency",
+    "Outbox Pattern",
+    "Retry Handling",
+    "Dead Letter Handling",
+    "Distributed Tracing",
+    "Centralized Logging",
+    "Metrics",
+    "Health Checks",
+    "Docker",
+    "Kubernetes",
+    "CI/CD",
+    "Architecture Documentation",
+    "Trade-off Documentation",
+    "Failure Scenario Demonstration"
+    ],
+    exit:{
+    understand:[
+    "Explain every service, API, table and event.",
+    "Explain architecture and failure scenarios."
+    ],
+    implement:[
+    "Run the entire system locally.",
+    "Implement resilience, observability and deployment."
+    ],
+    debug:[
+    "Demonstrate failure recovery.",
+    "Trace an issue through logs, metrics, events and database state."
+    ],
+    interview:[
+    "Defend architecture decisions.",
+    "Use the project for Java, SQL, Kafka, LLD and HLD discussions."
+    ]
+    }
+    },
+
+    {
+    id:"exp-simulation",
+    number:"15",
+    category:"Interview",
+    title:"Product Company Interview Simulation",
+    duration:"Weeks 30–36",
+    description:"Simulate the complete interview loop instead of preparing each topic independently.",
+    topics:[
+    "DSA Timed Rounds",
+    "Backend Coding Round",
+    "Java Deep Dive",
+    "SQL Round",
+    "LLD Round",
+    "HLD Round",
+    "Machine Coding",
+    "API Assignment",
+    "Debugging Round",
+    "Code Review",
+    "Behavioral Round",
+    "Project Deep Dive",
+    "Resume Deep Dive",
+    "Hiring Manager Discussion",
+    "Mock Interview",
+    "Post-Mock Review",
+    "Time Management",
+    "Communication Practice",
+    "Blank Editor Practice",
+    "Interview Retrospective"
+    ],
+    exit:{
+    understand:[
+    "Understand interview time allocation and expectations.",
+    "Know which weak areas remain after mock interviews."
+    ],
+    implement:[
+    "Solve problems under time pressure.",
+    "Design and code without relying on prepared templates."
+    ],
+    debug:[
+    "Recover from bugs and incomplete solutions.",
+    "Explain debugging decisions while solving."
+    ],
+    interview:[
+    "Complete a full mock loop.",
+    "Communicate clearly across coding, design, behavioral and project rounds."
+    ]
+    }
+    }
+
+    ]
+
+    };
+
+    /* =========================================================
+       TRACK CHROME
+    ========================================================= */
+
+    const trackChrome = {
+        tester: {
+            label: "Tester → Java Backend",
+            weeks: "18–22",
+            weeksLabel: "Weeks for Tester Track",
+            profileTitle: "Tester → Backend Developer — Target Profile",
+            profileDescription: "This is the capability profile for the first roadmap. The objective is to convert testing experience into the ability to design, build and debug production-style Java backend services.",
+            skills: [
+                ["Core Java", "OOP, collections, exceptions, streams and debugging."],
+                ["SQL", "Joins, indexes, transactions and query reading."],
+                ["Spring Boot", "DI, configuration, starters and application structure."],
+                ["REST", "API design, status codes, validation and error handling."],
+                ["JPA", "Entities, relationships, persistence context and mapping."],
+                ["Kafka", "Topics, producers, consumers and basic event flow."],
+                ["Microservices", "Service boundaries, communication and failure modes."],
+                ["Engineering tests", "Unit, API and integration tests as a developer skill."]
+            ],
+            execTitle: "Weekly Execution Plan — Tester Track",
+            execDescription: "A practical schedule for someone moving from testing into backend development. Click a day to mark this week's session done.",
+            days: [
+                ["MON", "40m Java<br>20m SQL"],
+                ["TUE", "35m Java<br>25m Spring"],
+                ["WED", "35m REST<br>25m SQL"],
+                ["THU", "35m JPA<br>25m Java"],
+                ["FRI", "30m Spring<br>30m REST"],
+                ["SAT", "Project<br>Debug"],
+                ["SUN", "Notes<br>Review"]
+            ]
+        },
+        experienced: {
+            label: "7.5 YOE → Product Company",
+            weeks: "30–36+",
+            weeksLabel: "Weeks for Experienced Track",
+            profileTitle: "Experienced Engineer — Target Profile",
+            profileDescription: "This is the capability profile for the second roadmap. The objective is not merely to know technologies, but to demonstrate engineering depth, problem-solving ability and system-level thinking.",
+            skills: [
+                ["Java / JVM", "Deep internals, concurrency, JVM, GC, modern Java."],
+                ["Backend", "Spring Boot, REST, JPA, transactions, APIs and resilience."],
+                ["DSA", "Patterns, complexity, medium problems and selected hard problems."],
+                ["LLD", "SOLID, OOD, design patterns, extensible Java designs."],
+                ["HLD", "Scalability, availability, consistency and distributed systems."],
+                ["Databases", "SQL, indexes, transactions, locking and database scaling."],
+                ["Messaging", "Kafka, partitions, delivery semantics, idempotency and events."],
+                ["Production", "Docker, Kubernetes, CI/CD, observability and incident debugging."]
+            ],
+            execTitle: "Weekly Execution Plan — Experienced Track",
+            execDescription: "A practical schedule for someone working full-time. The objective is consistency rather than trying to complete everything in one sitting. Click a day to mark this week's session done.",
+            days: [
+                ["MON", "35m DSA<br>25m Java"],
+                ["TUE", "35m DSA<br>25m Backend"],
+                ["WED", "30m HLD<br>30m DSA"],
+                ["THU", "35m DSA<br>25m LLD"],
+                ["FRI", "30m SQL<br>30m Backend"],
+                ["SAT", "Project<br>HLD / LLD"],
+                ["SUN", "Mock<br>Review"]
+            ]
+        }
+    };
+
+    const readinessItems = {
+        tester: [
+            "Explain Java OOP, collections and exception handling without notes.",
+            "Write and explain SQL joins, indexes and transactions.",
+            "Build a Spring Boot REST API from a blank project.",
+            "Explain dependency injection and the Spring application context.",
+            "Map entities with JPA and explain the persistence context.",
+            "Design REST endpoints with proper status codes and validation.",
+            "Explain Kafka at a producer/consumer level.",
+            "Debug a failing backend API using logs and a debugger.",
+            "Write unit and API tests for a service you built.",
+            "Explain how one microservice talks to another.",
+            "Walk through a personal backend project end to end.",
+            "Describe trade-offs instead of only listing tools.",
+            "Complete a 45-minute backend coding discussion.",
+            "Defend every major resume/project claim.",
+            "Explain a production-style error you diagnosed.",
+            "Demonstrate ownership through concrete examples from testing or development work."
+        ],
+        experienced: [
+            "Explain Java internals without documentation.",
+            "Solve common DSA patterns from a blank editor.",
+            "Explain HashMap and ConcurrentHashMap internals.",
+            "Design a production-style REST API.",
+            "Explain JPA persistence context and transactions.",
+            "Explain Kafka partitions, offsets and consumer groups.",
+            "Design a system for scale and failure.",
+            "Solve common LLD/OOD problems.",
+            "Explain SQL execution and query optimization.",
+            "Debug production-style backend failures.",
+            "Explain Docker/Kubernetes deployment architecture.",
+            "Conduct a 45–60 minute HLD discussion.",
+            "Defend every major project/resume claim.",
+            "Explain technical trade-offs instead of only definitions.",
+            "Complete multiple timed mock interviews.",
+            "Demonstrate ownership, impact and collaboration through concrete examples."
+        ]
+    };
+
+    /* =========================================================
+       STATE
+    ========================================================= */
+
+    const STORAGE_KEY = "java-career-roadmaps-v1";
+    const WEEKDAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+
+    let state = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "{}"
+    );
+
+    let activeRoadmap =
+        state.__meta__activeRoadmap === "experienced"
+            ? "experienced"
+            : "tester";
+
+    let topicFilter = state.__meta__filter || "all";
+    let toastTimer = null;
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
+
+    function saveState() {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(state)
+        );
+    }
+
+    function getTopicKey(roadmap, phaseId, index) {
+        return `${roadmap}__${phaseId}__${index}`;
+    }
+
+    function isChecked(roadmap, phaseId, index) {
+        return !!state[getTopicKey(roadmap, phaseId, index)];
+    }
+
+    function setChecked(roadmap, phaseId, index, value) {
+        state[getTopicKey(roadmap, phaseId, index)] = value;
+        saveState();
+    }
+
+    function collapsedKey(phaseId) {
+        return `__meta__collapsed__${activeRoadmap}__${phaseId}`;
+    }
+
+    function isCollapsed(phaseId) {
+        return !!state[collapsedKey(phaseId)];
+    }
+
+    function setCollapsed(phaseId, value) {
+        state[collapsedKey(phaseId)] = value;
+        saveState();
+    }
+
+    function weekKey() {
+        const now = new Date();
+        const utc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        const dayNum = new Date(utc).getUTCDay() || 7;
+        const thursday = new Date(utc);
+        thursday.setUTCDate(new Date(utc).getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(thursday.getUTCFullYear(), 0, 1));
+        const week = Math.ceil((((thursday - yearStart) / 86400000) + 1) / 7);
+        return `${thursday.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+    }
+
+    function dayDoneKey(day) {
+        return `__meta__day__${activeRoadmap}__${weekKey()}__${day}`;
+    }
+
+    function readyKey(index) {
+        return `__meta__ready__${activeRoadmap}__${index}`;
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    function phaseCounts(phase) {
+        const completed = phase.topics.reduce(
+            (count, _, index) =>
+                count + (isChecked(activeRoadmap, phase.id, index) ? 1 : 0),
+            0
+        );
+        return { completed, total: phase.topics.length };
+    }
+
+    /* =========================================================
+       ROADMAP SWITCH
+    ========================================================= */
+
+    function switchRoadmap(type) {
+        const sameTrack = activeRoadmap === type;
+        activeRoadmap = type;
+        state.__meta__activeRoadmap = type;
+        saveState();
+
+        document.getElementById("switcher-tester")
+            .classList.toggle("active", type === "tester");
+        document.getElementById("switcher-experienced")
+            .classList.toggle("active", type === "experienced");
+
+        document.querySelectorAll(".ladder-step").forEach(step => {
+            step.classList.toggle("active", step.dataset.track === type);
+        });
+
+        document.getElementById("searchInput").value = "";
+        render();
+        if (sameTrack) {
+            scrollToSection("roadmap-area");
+            return;
+        }
+        showToast(type === "tester"
+            ? "Switched to Tester → Java Backend"
+            : "Switched to Experienced → Product Company");
+    }
+
+    function setTopicFilter(filter) {
+        topicFilter = filter;
+        state.__meta__filter = filter;
+        saveState();
+        document.querySelectorAll("#filterChips .chip").forEach(chip => {
+            chip.classList.toggle("active", chip.dataset.filter === filter);
+        });
+        renderPhases();
+    }
+
+    function togglePhase(phaseId) {
+        const next = !isCollapsed(phaseId);
+        setCollapsed(phaseId, next);
+        const section = document.getElementById(`phase-${phaseId}`);
+        if (section) {
+            section.classList.toggle("collapsed", next);
+            const toggle = section.querySelector(".phase-toggle");
+            if (toggle) toggle.textContent = next ? "Show details" : "Hide details";
+        }
+    }
+
+    function toggleAllPhases(collapsed) {
+        roadmaps[activeRoadmap].forEach(phase => setCollapsed(phase.id, collapsed));
+        renderPhases();
+    }
+
+    function continueLearning() {
+        const query = document.getElementById("searchInput");
+        query.value = "";
+        topicFilter = "remaining";
+        state.__meta__filter = "remaining";
+        saveState();
+        document.querySelectorAll("#filterChips .chip").forEach(chip => {
+            chip.classList.toggle("active", chip.dataset.filter === "remaining");
+        });
+        renderPhases();
+
+        for (const phase of roadmaps[activeRoadmap]) {
+            const nextIndex = phase.topics.findIndex((_, index) =>
+                !isChecked(activeRoadmap, phase.id, index)
+            );
+            if (nextIndex === -1) continue;
+            setCollapsed(phase.id, false);
+            const section = document.getElementById(`phase-${phase.id}`);
+            if (section) {
+                section.classList.remove("collapsed");
+                section.scrollIntoView({ behavior: "smooth", block: "start" });
+                const topic = section.querySelectorAll(".topic")[nextIndex];
+                if (topic) {
+                    topic.classList.add("focus-topic");
+                    setTimeout(() => topic.classList.remove("focus-topic"), 2400);
+                }
+            }
+            return;
+        }
+
+        showToast("All topics on this track are complete.");
+        scrollToSection("final");
+    }
+
+    /* =========================================================
+       RENDER SIDEBAR
+    ========================================================= */
+
+    function renderSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const phases = roadmaps[activeRoadmap];
+
+        sidebar.innerHTML = `
+            <div class="sidebar-heading">
+                ${activeRoadmap === "tester"
+                    ? "Tester → Backend"
+                    : "7.5 YOE → Product Company"}
+            </div>
+        `;
+
+        phases.forEach(phase => {
+            const { completed, total } = phaseCounts(phase);
+            const link = document.createElement("a");
+            link.className = "phase-link" + (completed === total && total > 0 ? " done" : "");
+            link.href = `#phase-${phase.id}`;
+            link.innerHTML = `
+                <span>
+                    <span class="num">${phase.number}</span>
+                    ${phase.title}
+                </span>
+                <span class="mini">${completed}/${total}</span>
+            `;
+            sidebar.appendChild(link);
+        });
+    }
+
+    /* =========================================================
+       RENDER PHASES
+    ========================================================= */
+
+    function renderPhases() {
+        const container = document.getElementById("phases");
+        container.innerHTML = "";
+
+        const query = document.getElementById("searchInput").value.trim().toLowerCase();
+        const phases = roadmaps[activeRoadmap];
+        let visibleCount = 0;
+
+        phases.forEach(phase => {
+            const searchableText = [
+                phase.title,
+                phase.category,
+                phase.duration,
+                phase.description,
+                ...phase.topics,
+                ...phase.exit.understand,
+                ...phase.exit.implement,
+                ...phase.exit.debug,
+                ...phase.exit.interview
+            ].join(" ").toLowerCase();
+
+            if (query && !searchableText.includes(query)) return;
+
+            const visibleTopics = phase.topics
+                .map((topic, index) => ({ topic, index, checked: isChecked(activeRoadmap, phase.id, index) }))
+                .filter(item => {
+                    if (topicFilter === "remaining") return !item.checked;
+                    if (topicFilter === "done") return item.checked;
+                    return true;
+                });
+
+            if (topicFilter !== "all" && visibleTopics.length === 0 && !query) return;
+
+            visibleCount++;
+            const { completed: completedCount, total } = phaseCounts(phase);
+            const percent = total === 0 ? 0 : Math.round(completedCount / total * 100);
+            const collapsed = isCollapsed(phase.id);
+
+            const section = document.createElement("section");
+            section.className = "phase" + (collapsed ? " collapsed" : "") + (percent === 100 ? " is-complete" : "");
+            section.id = `phase-${phase.id}`;
+
+            section.innerHTML = `
+                <div class="phase-header" data-phase="${phase.id}">
+                    <div class="phase-top">
+                        <div class="phase-number">${phase.number}</div>
+                        <div class="phase-info">
+                            <div class="phase-category">${phase.category}</div>
+                            <div class="phase-title">${phase.title}</div>
+                            <div class="phase-duration">${phase.duration}</div>
+                            <div class="phase-description">${phase.description}</div>
+                        </div>
+                        <div class="phase-progress">
+                            <div class="phase-progress-text">
+                                <span>Progress</span>
+                                <span>${completedCount}/${total}</span>
+                            </div>
+                            <div class="mini-track">
+                                <div class="mini-fill" style="width:${percent}%"></div>
+                            </div>
+                            <div class="phase-toggle">${collapsed ? "Show details" : "Hide details"}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="topics">
+                        <div class="topics-heading">Topics</div>
+                        <div class="topic-grid">
+                            ${visibleTopics.map(({ topic, index, checked }) => `
+                                <label class="topic ${checked ? "completed" : ""}">
+                                    <input
+                                        type="checkbox"
+                                        data-phase="${phase.id}"
+                                        data-index="${index}"
+                                        ${checked ? "checked" : ""}
+                                    >
+                                    <span>${topic}</span>
+                                </label>
+                            `).join("")}
+                        </div>
+                    </div>
+                    <div class="exit-section">
+                        <div class="exit-heading">Exit Criteria</div>
+                        <div class="exit-grid">
+                            ${renderExitCard("📚", "Understand", phase.exit.understand)}
+                            ${renderExitCard("💻", "Implement", phase.exit.implement)}
+                            ${renderExitCard("🔍", "Debug", phase.exit.debug)}
+                            ${renderExitCard("🎯", "Interview Ready", phase.exit.interview)}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(section);
+        });
+
+        document.getElementById("noResults").style.display =
+            visibleCount === 0 ? "block" : "none";
+
+        attachPhaseListeners();
+        renderSidebar();
+    }
+
+    function renderExitCard(icon, title, items) {
+        return `
+            <div class="exit-card">
+                <h4>${icon} ${title}</h4>
+                <ul>
+                    ${items.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
+        `;
+    }
+
+    /* =========================================================
+       LISTENERS
+    ========================================================= */
+
+    function attachPhaseListeners() {
+        document.querySelectorAll(".phase-header").forEach(header => {
+            header.addEventListener("click", () => togglePhase(header.dataset.phase));
+        });
+
+        document.querySelectorAll('.topic input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener("click", event => event.stopPropagation());
+            checkbox.addEventListener("change", function () {
+                const phaseId = this.dataset.phase;
+                const index = Number(this.dataset.index);
+                const phase = roadmaps[activeRoadmap].find(item => item.id === phaseId);
+                const wasComplete = phase && phaseCounts(phase).completed === phase.topics.length;
+
+                setChecked(activeRoadmap, phaseId, index, this.checked);
+
+                const label = this.closest(".topic");
+                if (label) label.classList.toggle("completed", this.checked);
+
+                updateProgress();
+                updatePhaseProgress(phaseId);
+
+                const nowComplete = phase && phaseCounts(phase).completed === phase.topics.length;
+                if (nowComplete && !wasComplete) {
+                    showToast(`Phase complete: ${phase.title}`);
+                    document.getElementById(`phase-${phaseId}`)?.classList.add("is-complete");
+                }
+
+                if (topicFilter !== "all") renderPhases();
+            });
+        });
+    }
+
+    /* =========================================================
+       PHASE PROGRESS
+    ========================================================= */
+
+    function updatePhaseProgress(phaseId) {
+        const phase = roadmaps[activeRoadmap].find(item => item.id === phaseId);
+        if (!phase) return;
+
+        const section = document.getElementById(`phase-${phaseId}`);
+        if (!section) return;
+
+        const { completed: count, total } = phaseCounts(phase);
+        const percent = Math.round(count / total * 100);
+        const text = section.querySelector(".phase-progress-text span:last-child");
+        const fill = section.querySelector(".mini-fill");
+
+        if (text) text.textContent = `${count}/${total}`;
+        if (fill) fill.style.width = `${percent}%`;
+        section.classList.toggle("is-complete", percent === 100);
+    }
+
+    /* =========================================================
+       OVERALL PROGRESS
+    ========================================================= */
+
+    function updateProgress() {
+        const phases = roadmaps[activeRoadmap];
+        let total = 0;
+        let completed = 0;
+        let remainingPhases = 0;
+
+        phases.forEach(phase => {
+            const counts = phaseCounts(phase);
+            total += counts.total;
+            completed += counts.completed;
+            if (counts.completed < counts.total) remainingPhases++;
+        });
+
+        const percent = total === 0 ? 0 : Math.round(completed / total * 100);
+
+        document.getElementById("overallPercent").textContent = `${percent}%`;
+        document.getElementById("overallFill").style.width = `${percent}%`;
+        document.getElementById("overallLabel").textContent =
+            `${trackChrome[activeRoadmap].label} (${completed}/${total})`;
+
+        document.getElementById("statTrack").textContent = activeRoadmap === "tester" ? "A" : "B";
+        document.getElementById("statTrackLabel").textContent = trackChrome[activeRoadmap].label;
+        document.getElementById("statWeeks").textContent = trackChrome[activeRoadmap].weeks;
+        document.getElementById("statWeeksLabel").textContent = trackChrome[activeRoadmap].weeksLabel;
+        document.getElementById("statTopics").textContent = `${completed}/${total}`;
+        document.getElementById("statPhases").textContent = remainingPhases;
+    }
+
+    function renderTrackChrome() {
+        const chrome = trackChrome[activeRoadmap];
+        document.getElementById("profileTitle").textContent = chrome.profileTitle;
+        document.getElementById("profileDescription").textContent = chrome.profileDescription;
+        document.getElementById("skillMatrix").innerHTML = chrome.skills.map(([title, detail]) => `
+            <div class="skill" data-skill="${title}">
+                <strong>${title}</strong>
+                <span>${detail}</span>
+            </div>
+        `).join("");
+
+        document.querySelectorAll("#skillMatrix .skill").forEach(skill => {
+            skill.addEventListener("click", () => {
+                document.getElementById("searchInput").value = skill.dataset.skill.split("/")[0].trim();
+                renderPhases();
+                scrollToSection("roadmap-area");
+            });
+        });
+
+        document.getElementById("executionTitle").textContent = chrome.execTitle;
+        document.getElementById("executionDescription").textContent = chrome.execDescription;
+
+        const today = WEEKDAYS[new Date().getDay()];
+        document.getElementById("executionGrid").innerHTML = chrome.days.map(([day, plan]) => {
+            const done = !!state[dayDoneKey(day)];
+            return `
+                <div class="day ${day === today ? "today" : ""} ${done ? "done" : ""}" data-day="${day}">
+                    <strong>${day}</strong>
+                    <span>${plan}</span>
+                </div>
+            `;
+        }).join("");
+
+        document.querySelectorAll("#executionGrid .day").forEach(dayEl => {
+            dayEl.addEventListener("click", () => {
+                const key = dayDoneKey(dayEl.dataset.day);
+                state[key] = !state[key];
+                saveState();
+                dayEl.classList.toggle("done", !!state[key]);
+                showToast(state[key]
+                    ? `${dayEl.dataset.day} session marked done`
+                    : `${dayEl.dataset.day} session unmarked`);
+                renderTodayBanner();
+            });
+        });
+
+        const items = readinessItems[activeRoadmap];
+        document.getElementById("finalChecklist").innerHTML = items.map((item, index) => `
+            <label class="check-item ${state[readyKey(index)] ? "done" : ""}">
+                <input type="checkbox" data-ready="${index}" ${state[readyKey(index)] ? "checked" : ""}>
+                <span>${item}</span>
+            </label>
+        `).join("");
+
+        document.querySelectorAll("#finalChecklist input").forEach(input => {
+            input.addEventListener("change", function () {
+                state[readyKey(this.dataset.ready)] = this.checked;
+                saveState();
+                this.closest(".check-item").classList.toggle("done", this.checked);
+            });
+        });
+
+        renderTodayBanner();
+    }
+
+    function renderTodayBanner() {
+        const today = WEEKDAYS[new Date().getDay()];
+        const plan = trackChrome[activeRoadmap].days.find(([day]) => day === today);
+        const done = !!state[dayDoneKey(today)];
+        document.getElementById("todayTitle").textContent = done
+            ? `${today}: session complete`
+            : `${today}: today's session`;
+        document.getElementById("todayDetail").textContent = plan
+            ? plan[1].replace(/<br>/g, " · ")
+            : "Keep the next incomplete topic moving.";
+    }
+
+    /* =========================================================
+       SEARCH / KEYBOARD / NAV
+    ========================================================= */
+
+    document.getElementById("searchInput").addEventListener("input", renderPhases);
+
+    document.addEventListener("keydown", event => {
+        const typing = ["INPUT", "TEXTAREA"].includes(event.target.tagName);
+        if (event.key === "/" && !typing) {
+            event.preventDefault();
+            document.getElementById("searchInput").focus();
+        }
+        if (event.key === "1" && !typing) switchRoadmap("tester");
+        if (event.key === "2" && !typing) switchRoadmap("experienced");
+    });
+
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            document.querySelectorAll(".nav button").forEach(button => {
+                button.classList.toggle("active", button.dataset.section === entry.target.id);
+            });
+        });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.1 });
+
+    ["top", "career", "roadmap-area", "execution", "final"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) navObserver.observe(el);
+    });
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    function resetProgress() {
+        const roadmapName = trackChrome[activeRoadmap].label;
+        if (!confirm(`Reset all progress for "${roadmapName}"?`)) return;
+
+        const prefixes = [
+            `${activeRoadmap}__`,
+            `__meta__collapsed__${activeRoadmap}__`,
+            `__meta__day__${activeRoadmap}__`,
+            `__meta__ready__${activeRoadmap}__`
+        ];
+
+        Object.keys(state).forEach(key => {
+            if (prefixes.some(prefix => key.startsWith(prefix))) {
+                delete state[key];
+            }
+        });
+
+        saveState();
+        render();
+        showToast("Progress reset for this track.");
+    }
+
+    /* =========================================================
+       MASTER RENDER
+    ========================================================= */
+
+    function render() {
+        document.getElementById("switcher-tester")
+            .classList.toggle("active", activeRoadmap === "tester");
+        document.getElementById("switcher-experienced")
+            .classList.toggle("active", activeRoadmap === "experienced");
+        document.querySelectorAll(".ladder-step").forEach(step => {
+            step.classList.toggle("active", step.dataset.track === activeRoadmap);
+        });
+        document.querySelectorAll("#filterChips .chip").forEach(chip => {
+            chip.classList.toggle("active", chip.dataset.filter === topicFilter);
+        });
+        renderSidebar();
+        renderPhases();
+        renderTrackChrome();
+        updateProgress();
+    }
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    render();
+
+</script>
+
+</body>
+</html>
